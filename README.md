@@ -8,28 +8,17 @@ Instead of relying on generic AI knowledge, this system retrieves relevant video
 
 ## ✨ Key Features
 
-- 🎥 **Video-first learning**  
-  Answers are grounded in actual lecture videos
-
-- ⏱️ **Timestamp-accurate guidance**  
-  Points students to the exact moment a concept is taught
-
-- 🔍 **Semantic search with embeddings**  
-  Finds the most relevant content using vector similarity
-
-- 🧠 **RAG architecture**  
-  Eliminates hallucinations by forcing answers from retrieved context
-
-- 🧩 **Modular pipeline**  
-  Easy to adapt for any course or video dataset
-
-- 💻 **Flexible deployment**  
-  Runs locally with lightweight models and supports cloud LLMs for scale
+- 🎥 **Video-first learning** – Answers are grounded in actual lecture videos  
+- ⏱️ **Timestamp-accurate guidance** – Points students to the exact moment a concept is taught  
+- 🔍 **Semantic search with embeddings** – Finds relevant content using vector similarity  
+- 🧠 **RAG architecture** – Eliminates hallucinations by answering strictly from retrieved context  
+- 🧩 **Modular pipeline** – Easy to adapt for any course or video dataset  
+- 💻 **Flexible deployment** – Runs locally with lightweight models and supports cloud LLMs  
 
 ---
-## 🏗️ Project Architecture
 
-**
+## 🏗️ Project Architecture
+```
 Videos
 ↓
 Audio Extraction (ffmpeg)
@@ -45,15 +34,14 @@ Vector Similarity Search
 Prompt Construction (RAG)
 ↓
 LLM Answer with Video + Timestamp
-**
+```
 ---
 
 ## 📂 Project Structure
-
-**
+```
 RAG-based-ai/
 │
-├── videos/ # Raw course videos
+├── videos/ # Raw course videos (not included due to size limits)
 ├── audios/ # Extracted mp3 audio files
 ├── jsons/ # Timestamped transcript chunks
 │
@@ -65,17 +53,15 @@ RAG-based-ai/
 ├── embeddings.joblib # Stored vector embeddings
 ├── prompt.txt # Generated RAG prompt (for inspection)
 ├── response.txt # Model response output
-└── Readme.md # Project documentation
-**
+└── README.md # Project documentation
 
----
+```
 
 ## ⚙️ How It Works (Step-by-Step)
 
 ### 1️⃣ Convert Videos to Audio
 
 All lecture videos are converted to `.mp3` format for transcription.
-
 python video_to_mp3.py
 Uses ffmpeg to extract audio while preserving video numbering and titles.
 
@@ -83,28 +69,25 @@ Uses ffmpeg to extract audio while preserving video numbering and titles.
 Each audio file is transcribed using OpenAI Whisper, producing timestamped subtitle chunks.
 
 python mp3_to_json.py
+
 Each chunk contains:
-
-Video number
-
-Video title
-
-Start time
-
-End time
-
-Spoken text
+1.Video number
+2.Video title
+3.Start time
+4.End time
+5.Spoken text
 
 ### 3️⃣ Generate Embeddings (Vectorization)
-All transcript chunks are converted into embeddings using Ollama’s embedding API and stored in a dataframe.
+All transcript chunks are converted into embeddings using Ollama’s embedding API.
 
 python preprocess_json.py
+
 Embeddings are saved as embeddings.joblib
 
 Enables fast semantic similarity search
 
 ### 4️⃣ Ask Questions (RAG Inference)
-Students can now ask questions in natural language.
+Students can ask questions in natural language.
 
 python process_incoming.py
 The system:
@@ -119,7 +102,7 @@ Sends it to a lightweight LLM
 
 Returns a grounded answer with video number & timestamps
 
-## 🧠 Prompt Design (Anti-Hallucination)
+🧠 Prompt Design (Anti-Hallucination)
 The model is explicitly restricted to answer only from retrieved transcript chunks.
 
 If the answer is not present in the videos, the system responds:
@@ -128,26 +111,26 @@ If the answer is not present in the videos, the system responds:
 
 This ensures trustworthy, course-aligned answers.
 
-## 🖥️ Models Used
-### 🎙️ Speech-to-Text
+🖥️ Models Used
+🎙️ Speech-to-Text
 Whisper (base) – stable and CPU-friendly
 
-### 🔍 Embeddings
+🔍 Embeddings
 nomic-embed-text (via Ollama)
 
 768-dimensional embeddings
 
 Optimized for semantic search
 
-### 🤖 Language Model
-qwen2.5:1.5b (lightweight, local-friendly)
+🤖 Language Model
+qwen2.5:1.5b – lightweight and local-friendly
 
-Architecture supports easy swap to cloud LLMs (OpenAI, Groq, etc.)
+Easy to swap with cloud LLMs (OpenAI, Groq, etc.)
 
-## ⚠️ Hardware Notes
+⚠️ Hardware Notes
 Designed to work on low-resource systems
 
-Local LLMs are kept intentionally small
+Local LLMs are intentionally lightweight
 
 For best performance:
 
@@ -155,18 +138,15 @@ Use cloud LLM APIs for inference
 
 Keep embeddings and retrieval local
 
-## 🧪 Example Query
-# Question
-
+🧪 Example Query
+Question
 Where were semantic tags taught?
-# Answer
-
+Answer
 Video 11: Installing VS Code & How Websites Work
 Timestamp: 109.82 – 145.30 seconds
-Explanation: This section introduces semantic HTML tags, explains their purpose,
-and why they improve structure and accessibility.
-
-### 🚀 Use Cases
+Explanation: This section introduces semantic HTML tags,
+explains their purpose, and why they improve structure and accessibility.
+🚀 Use Cases
 AI tutor for recorded courses
 
 Timestamp-based doubt resolution
@@ -179,7 +159,7 @@ Internal corporate training
 
 Lecture search & summarization
 
-### 🔮 Future Improvements
+🔮 Future Improvements
 🌐 Web UI (FastAPI + Frontend)
 
 🔗 Clickable video timestamps
@@ -192,11 +172,9 @@ Lecture search & summarization
 
 📚 Multi-course support
 
-### 👤 Author
+👤 Author
 Huzaif Ulla Khan
 BE in Computer Science Engineering
 AI & Machine Learning Enthusiast
 
 Project: RAG-Based AI Teaching Assistant
-
-
