@@ -1,0 +1,6 @@
+# Large media files
+videos/
+audios/
+*.mp3
+*.webm
+*.wav
