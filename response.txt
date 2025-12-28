@@ -1,0 +1,7 @@
+Video 4: "Heading, Paragraphs and Links"
+Timestamp: 387.8–390.8 seconds
+Explanation: This video explains how to create heading, paragraphs, and links in HTML, which is the foundation of web development.
+
+[Video 2: Your First HTML Website]
+Timestamp: 301.56–305.28 seconds
+Explanation: The second video outlines that this course is for beginners and covers creating a basic HTML website from scratch.
